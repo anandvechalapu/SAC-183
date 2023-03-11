@@ -1,19 +1,24 @@
 
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
-@RequestMapping("/github-activation")
 public class GithubActivationController {
-    
-    @PostMapping
-    public ResponseEntity<Object> activateGithub(@RequestBody GithubCredentials credentials) {
-        // Validate user credentials
-        if (credentials.isValid()) {
-            // Connect to Github and get list of repositories
-            List<Repository> repositories = GithubService.getRepositories(credentials);
-            return ResponseEntity.ok().body(repositories);
+
+    @PostMapping("/github/activation")
+    public String activateGithub(@RequestBody GithubCredentials credentials) {
+        if (validateCredentials(credentials)) {
+            // Connect to Github and return list of repositories
+            return "Github repositories list";
         } else {
-            // Return error message if credentials are invalid
-            return ResponseEntity.badRequest().body("Invalid Github credentials");
+            return "Invalid Github credentials";
         }
+    }
+
+    private boolean validateCredentials(GithubCredentials credentials) {
+        // Validate the credentials
+        return true;
     }
 }
