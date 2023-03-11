@@ -3,21 +3,20 @@
 @Repository
 public class GithubActivationRepository {
 
-    public boolean validateCredentials(String username, String password) {
-        // Validate the user's Github credentials
-        return true;
-    }
+  private EntityManager entityManager;
+  
+  public GithubActivationRepository(EntityManager entityManager) {
+    this.entityManager = entityManager;
+  }
 
-    public List<String> getRepositories(String username) {
-        // Get the list of Github repositories for the given user
-        List<String> repositories = new ArrayList<>();
-        // Add the repositories to the list
-        return repositories;
-    }
+  public boolean validateGithubCredentials(String username, String password) {
+    // Validation logic goes here
+    return true;
+  }
+  
+  public List<GithubRepository> getGithubRepositories(String username) {
+    // Fetching logic goes here
+    return new ArrayList<>();
+  }
 
-    public String generateErrorMessage() {
-        // Generate an error message if the user enters invalid Github credentials
-        String message = "Invalid Github credentials, please try again.";
-        return message;
-    }
 }
